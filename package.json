@@ -1,6 +1,6 @@
 {
   "name": "pipilu-test-electron",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "electron自动更新",
   "main": "main.js",
   "author": "Jane Doe",
@@ -40,8 +40,7 @@
     },
     "win": {
       "target": [
-        "nsis",
-        "squirrel"
+        "nsis"
       ],
       "verifyUpdateCodeSignature": false
     },
