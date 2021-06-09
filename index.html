@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Hello dzg!0.0.5</h1>
+    <script>
+      const electron = require('electron');
+      electron.ipcRenderer.send('checkForUpdate');
+      electron.ipcRenderer.on('message', (event, message) => {
+        console.log(message); // Prints 'whoooooooh!'
+      });
+      electron.ipcRenderer.on('downloadProgress', (event, message) => {
+        console.log(message); // Prints 'whoooooooh!'
+      });
+    </script>
+    <!-- <script src="./index.js"></script> -->
+  </body>
+</html>

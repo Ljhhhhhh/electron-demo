@@ -1,0 +1,77 @@
+{
+  "name": "pipilu-test-electron",
+  "version": "0.0.5",
+  "description": "electron自动更新",
+  "main": "main.js",
+  "author": "Jane Doe",
+  "scripts": {
+    "codesign": "codesign --deep --force --verbose --sign - node_modules/electron/dist/Electron.app",
+    "start": "electron --inspect .",
+    "build:app": "electron-builder --mac",
+    "build:dist": "tsc",
+    "build:renderer": "cd renderer && yarn build",
+    "watch": "tsc -w",
+    "lint": "eslint -c .eslintrc --ext .ts ./src",
+    "build": "npm run build:renderer && npm run build:dist && npm run build:app",
+    "build:win": "electron-builder --win"
+  },
+  "build": {
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://electron-update.plusdoit.com/download/",
+        "channel": "stable"
+      }
+    ],
+    "files": [
+      "build/**/*",
+      "main.js",
+      "index.html"
+    ],
+    "electronDownload": {
+      "mirror": "https://npm.taobao.org/mirrors/electron/"
+    },
+    "appId": "com.wwl.app",
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "squirrel"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "installerIcon": "build/icons/icon.ico",
+      "perMachine": false,
+      "unicode": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "squirrelWindows": {
+      "iconUrl": "http://www.plusdoit.com/uploads/allimg/20210404/1-210404123553S9.jpeg",
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "icon": "build/icon.icns"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^13.1.0",
+    "electron-builder": "^22.10.5",
+    "electron-builder-squirrel-windows": "^22.11.5",
+    "update-electron-app": "^2.0.1"
+  },
+  "dependencies": {
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^4.3.5",
+    "electron-osx-sign": "^0.5.0",
+    "electron-updater": "^4.3.9"
+  }
+}
