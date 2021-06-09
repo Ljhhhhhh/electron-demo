@@ -6,7 +6,7 @@
   "author": "Jane Doe",
   "scripts": {
     "codesign": "codesign --deep --force --verbose --sign - node_modules/electron/dist/Electron.app",
-    "start": "electron --inspect .",
+    "start": "cross-env NODE_ENV=development electron --inspect .",
     "build:app": "electron-builder --mac",
     "build:dist": "tsc",
     "build:renderer": "cd renderer && yarn build",
@@ -63,6 +63,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "electron": "^13.1.0",
     "electron-builder": "^22.10.5",
     "electron-builder-squirrel-windows": "^22.11.5",

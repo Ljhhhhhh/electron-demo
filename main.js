@@ -28,10 +28,13 @@ function handleUpdate () {
   // 设置是否自动下载，默认是true,当点击检测到新版本时，会自动下载安装包，所以设置为false
   autoUpdater.autoDownload = true
   // https://github.com/electron-userland/electron-builder/issues/1254
+  if (process.env.NODE_ENV === 'development') {
+    autoUpdater.updateConfigPath = path.join(__dirname, 'default-app-update.yml')
+  }
   // if (process.env.NODE_ENV === 'development') {
   //   autoUpdater.updateConfigPath = path.join(__dirname, 'default-app-update.yml')
   // } else {
-  //   autoUpdater.updateConfigPath = path.join(__dirname, '../../../app-update.yml')
+  //   autoUpdater.updateConfigPath = path.join(__dirname, 'default-app-update.yml')
   // }
   const updateURL = `http://electron-update.plusdoit.com/update/${platform}/stable`;
   autoUpdater.setFeedURL(updateURL)
@@ -54,10 +57,9 @@ function handleUpdate () {
 
   // 更新下载进度事件
   autoUpdater.on('download-progress', function (progressObj) {
-    log.warn('触发下载。。。')
-    console.log(progressObj)
-    log.warn(progressObj)
-    myWin.webContents.send('downloadProgress', progressObj)
+    // log.warn('触发下载。。。')
+    // console.log(progressObj)
+    // log.warn(progressObj)
     sendUpdateMessage(progressObj)
   })
   autoUpdater.on('update-downloaded', function (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
