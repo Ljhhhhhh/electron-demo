@@ -14,10 +14,10 @@ var version = app.getVersion();
 // autoUpdater.setFeedURL('http://download.myapp.com/update/'+platform+'/'+version);
 
 let myWin = null;
+const isMac = process.platform === 'darwin'
 
 
 function handleUpdate () {
-  console.log(process.env.NODE_ENV, 1234)
   //= =================================================================================================================
   const message = {
     error: '检查更新出错',
@@ -29,14 +29,24 @@ function handleUpdate () {
   autoUpdater.autoDownload = true
   // https://github.com/electron-userland/electron-builder/issues/1254
   if (process.env.NODE_ENV === 'development') {
-    autoUpdater.updateConfigPath = path.join(__dirname, 'default-app-update.yml')
+    if (!isMac) {
+      autoUpdater.updateConfigPath = path.join(__dirname, 'latest.yml')
+      // mac的地址是'Contents/Resources/app-update.yml'
+    } else {
+      autoUpdater.updateConfigPath = path.join(__dirname, 'default-app-update.yml')
+    }
   }
+
+
   // if (process.env.NODE_ENV === 'development') {
   //   autoUpdater.updateConfigPath = path.join(__dirname, 'default-app-update.yml')
   // } else {
   //   autoUpdater.updateConfigPath = path.join(__dirname, 'default-app-update.yml')
   // }
   const updateURL = `http://electron-update.plusdoit.com/update/${platform}/stable`;
+  // const updateURL = `http://electron-update.plusdoit.com/update/${platform}/${version}`;
+  // const updateURL = `http://192.168.3.137:3000/`;
+  sendUpdateMessage(updateURL);
   autoUpdater.setFeedURL(updateURL)
   autoUpdater.on('error', function () {
     sendUpdateMessage(message.error)

@@ -1,6 +1,6 @@
 {
   "name": "pipilu-test-electron",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "electron自动更新",
   "main": "main.js",
   "author": "Jane Doe",
@@ -19,8 +19,8 @@
     "publish": [
       {
         "provider": "generic",
-        "url": "http://electron-update.plusdoit.com/download/",
-        "channel": "stable"
+        "url": "http://electron-update.plusdoit.com/",
+        "publishAutoUpdate": true
       }
     ],
     "files": [
@@ -42,7 +42,8 @@
       "target": [
         "nsis",
         "squirrel"
-      ]
+      ],
+      "verifyUpdateCodeSignature": false
     },
     "nsis": {
       "oneClick": false,
