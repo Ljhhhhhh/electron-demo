@@ -7,7 +7,6 @@ const os = require('os')
 var log = require('electron-log')
 log.transports.console.level = 'silly'
 log.transports.file.level = 'info'
-// var autoUpdater = require('electron').autoUpdater;
 
 var platform = os.platform() + '_' + os.arch();  // usually returns darwin_64
 let updateWin = null;
@@ -43,8 +42,8 @@ function handleUpdate (winInstance) {
   autoUpdater.on('checking-for-update', function () {
     sendUpdateMessage(winInstance, message.checking)
   })
-  autoUpdater.on('update-available', function (info) {
-    dialog.showMessageBox({
+  autoUpdater.on('update-available', async function (info) {
+    await dialog.showMessageBox({
       type: "info",
       title: "检查到新版本!",
       buttons: ["立即更新"],
@@ -76,20 +75,27 @@ function handleUpdate (winInstance) {
   // 更新下载进度事件
   autoUpdater.on('download-progress', function (progressObj) {
     updateWin.webContents.send('download-progress', progressObj.percent)
-    if (progressObj.percent === 100) {
-      updateWin.destroy();
-    }
   })
-  autoUpdater.on('update-downloaded', function (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
-    ipcMain.on('isUpdateNow', (e, arg) => {
-      log.warn('开始更新')
-      autoUpdater.quitAndInstall()
-      winInstance.destroy()
-      app.relaunch()
-      app.exit()
-      // callback()
+  autoUpdater.on('update-downloaded', async function (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
+    log.warn('开始更新')
+    updateWin.destroy();
+    await dialog.showMessageBox({
+      type: "info",
+      title: "立即重启!",
+      buttons: ["确定"],
+      message: `重启更新`
     })
-    sendUpdateMessage(winInstance, 'isUpdateNow')
+    autoUpdater.quitAndInstall()
+
+
+    // ipcMain.on('isUpdateNow', (e, arg) => {
+    //   log.warn('开始更新')
+    //   autoUpdater.quitAndInstall()
+    //   winInstance.destroy()
+    //   app.relaunch()
+    //   app.exit()
+    // })
+    // sendUpdateMessage(winInstance, 'isUpdateNow')
   })
 
   ipcMain.on('checkForUpdate', () => {
