@@ -36,28 +36,35 @@ function handleUpdate (winInstance) {
   const updateURL = `http://electron-update.plusdoit.com/update/${platform}/stable`;
   autoUpdater.setFeedURL(updateURL)
   autoUpdater.on('error', function () {
+    log.warn('error handle')
     sendUpdateMessage(winInstance, message.error)
     updateWin.destroy();
   })
   autoUpdater.on('checking-for-update', function () {
     sendUpdateMessage(winInstance, message.checking)
   })
-  autoUpdater.on('update-available', async function (info) {
-    await dialog.showMessageBox({
-      type: "info",
-      title: "检查到新版本!",
-      buttons: ["立即更新"],
-      detail: "更新后重启可用!",
-      message: `发现新版本${info.version}`
-    })
+  autoUpdater.on('update-available', function (info) {
+    // await dialog.showMessageBox({
+    //   type: "info",
+    //   title: "检查到新版本!",
+    //   buttons: ["立即更新"],
+    //   detail: "更新后重启可用!",
+    //   message: `发现新版本${info.version}`
+    // })
     sendUpdateMessage(winInstance, info)
 
     updateWin = new BrowserWindow({
       parent: winInstance,
       modal: true,
+      show: false,
       width: 240,
       frame: false,
       height: 160,
+      resizable: false,
+      movable: false,
+      closable: false,
+      momodalable: true,
+      alwaysOnTop: true,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -67,6 +74,10 @@ function handleUpdate (winInstance) {
     updateWin.loadFile(
       path.join(__dirname, "../appUpdate/index.html")
     );
+
+    updateWin.once('ready-to-show', () => {
+      updateWin.show()
+    })
   })
   autoUpdater.on('update-not-available', function (info) {
     sendUpdateMessage(winInstance, message.updateNotAva)
@@ -74,16 +85,18 @@ function handleUpdate (winInstance) {
 
   // 更新下载进度事件
   autoUpdater.on('download-progress', function (progressObj) {
+    log.warn(progressObj)
     updateWin.webContents.send('download-progress', progressObj.percent)
   })
   autoUpdater.on('update-downloaded', async function (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
     log.warn('开始更新')
-    updateWin.destroy();
+    updateWin && updateWin.destroy();
+    log.warn('updateWin destroy')
     await dialog.showMessageBox({
       type: "info",
       title: "立即重启!",
       buttons: ["确定"],
-      message: `重启更新`
+      message: `下载完成，重启已完成更新`
     })
     autoUpdater.quitAndInstall()
 

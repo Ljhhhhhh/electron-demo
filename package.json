@@ -1,6 +1,6 @@
 {
   "name": "pipilu-test-electron",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "electron自动更新",
   "main": "main/index.js",
   "author": "Jane Doe",
