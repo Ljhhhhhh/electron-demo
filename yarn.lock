@@ -152,6 +152,11 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+accessibility-developer-tools@^2.11.0:
+  version "2.12.0"
+  resolved "https://npm.olymtech.com/nexus/repository/dzg-npm/accessibility-developer-tools/-/accessibility-developer-tools-2.12.0.tgz#3da0cce9d6ec6373964b84f35db7cfc3df7ab514"
+  integrity sha1-PaDM6dbsY3OWS4TzXbfPw996tRQ=
+
 ajv-keywords@^3.4.1:
   version "3.5.2"
   resolved "https://registry.nlark.com/ajv-keywords/download/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
@@ -791,6 +796,15 @@ detect-node@^2.0.4:
   resolved "https://registry.nlark.com/detect-node/download/detect-node-2.1.0.tgz?cache=0&sync_timestamp=1621146902208&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdetect-node%2Fdownload%2Fdetect-node-2.1.0.tgz#c9c70775a49c3d03bc2c06d9a73be550f978f8b1"
   integrity sha1-yccHdaScPQO8LAbZpzvlUPl4+LE=
 
+devtron@^1.4.0:
+  version "1.4.0"
+  resolved "https://npm.olymtech.com/nexus/repository/dzg-npm/devtron/-/devtron-1.4.0.tgz#b5e748bd6e95bbe70bfcc68aae6fe696119441e1"
+  integrity sha1-tedIvW6Vu+cL/MaKrm/mlhGUQeE=
+  dependencies:
+    accessibility-developer-tools "^2.11.0"
+    highlight.js "^9.3.0"
+    humanize-plus "^1.8.1"
+
 dir-compare@^2.4.0:
   version "2.4.0"
   resolved "https://registry.nlark.com/dir-compare/download/dir-compare-2.4.0.tgz#785c41dc5f645b34343a4eafc50b79bac7f11631"
@@ -931,6 +945,13 @@ electron-osx-sign@^0.5.0:
     minimist "^1.2.0"
     plist "^3.0.1"
 
+electron-progressbar@^2.0.1:
+  version "2.0.1"
+  resolved "https://npm.olymtech.com/nexus/repository/dzg-npm/electron-progressbar/-/electron-progressbar-2.0.1.tgz#97e39e006cc9f4a63c598b03b171800fd47f8f33"
+  integrity sha512-+N60GX2q+KH5OvZXxwtjMTZB/1AyxriFd95vOnR3sOfNpvz+30LMsM0a9SnEivZE6N8Djy7F3z4TY8pLs8aopw==
+  dependencies:
+    extend "^3.0.1"
+
 electron-publish@22.10.5:
   version "22.10.5"
   resolved "https://registry.nlark.com/electron-publish/download/electron-publish-22.10.5.tgz#9cbe46266b6c79d8c6e99840755682e2262d3543"
@@ -1047,6 +1068,11 @@ exit-on-epipe@~1.0.1:
   version "1.0.1"
   resolved "https://npm.olymtech.com/nexus/repository/dzg-npm/exit-on-epipe/-/exit-on-epipe-1.0.1.tgz#0bdd92e87d5285d267daa8171d0eb06159689692"
   integrity sha512-h2z5mrROTxce56S+pnvAV890uu7ls7f1kEvVGJbw1OlFH3/mlJ5bkXu0KRyW94v37zzHPiUd55iLn3DA7TjWpw==
+
+extend@^3.0.1:
+  version "3.0.2"
+  resolved "https://npm.olymtech.com/nexus/repository/dzg-npm/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
+  integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
 
 extract-zip@^1.0.3:
   version "1.7.0"
@@ -1254,6 +1280,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+highlight.js@^9.3.0:
+  version "9.18.5"
+  resolved "https://npm.olymtech.com/nexus/repository/dzg-npm/highlight.js/-/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
+  integrity sha512-a5bFyofd/BHCX52/8i8uJkjr9DYwXIPnM/plwI6W7ezItLGqzt7X2G2nXuYSfsIJdkwwj/g9DG1LkcGJI/dDoA==
+
 hosted-git-info@^3.0.8:
   version "3.0.8"
   resolved "https://registry.nlark.com/hosted-git-info/download/hosted-git-info-3.0.8.tgz#6e35d4cc87af2c5f816e4cb9ce350ba87a3f370d"
@@ -1272,6 +1303,11 @@ http-cache-semantics@^4.0.0:
   version "4.1.0"
   resolved "https://registry.nlark.com/http-cache-semantics/download/http-cache-semantics-4.1.0.tgz#49e91c5cbf36c9b94bcfcd71c23d5249ec74e390"
   integrity sha1-SekcXL82yblLz81xwj1SSex045A=
+
+humanize-plus@^1.8.1:
+  version "1.8.2"
+  resolved "https://npm.olymtech.com/nexus/repository/dzg-npm/humanize-plus/-/humanize-plus-1.8.2.tgz#a65b34459ad6367adbb3707a82a3c9f916167030"
+  integrity sha1-pls0RZrWNnrbs3B6gqPJ+RYWcDA=
 
 iconv-corefoundation@^1.1.6:
   version "1.1.6"

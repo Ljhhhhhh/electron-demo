@@ -1,3 +1,0 @@
-provider: generic
-url: http://electron-update.plusdoit.com:5000/download/
-updaterCacheDirName: pipilu-test-electron-updater

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+      #progress {
+        height: 1.44em;
+      }
+    </style>
+  </head>
+  <body>
+    <p>新版本下载中……</p>
+    <progress id="progress" value="0" max="100"></progress>
+
+    <script type="text/javascript">
+      const progress = document.getElementById('progress');
+      const electron = require('electron');
+      electron.ipcRenderer.on('download-progress', (event, message) => {
+        progress.setAttribute('value', +message);
+      });
+    </script>
+  </body>
+</html>
